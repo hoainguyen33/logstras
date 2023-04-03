@@ -1,21 +1,25 @@
-package log
+package logtras
 
 import (
 	"bytes"
 	"io"
-	"log"
+	l "log"
 	"sync"
+
+	"github.com/hoainguyen33/logstras/log"
 )
 
+var DefaultLogger log.Logger = NewStdLogger(l.Writer())
+
 type stdLogger struct {
-	log    *log.Logger
+	log    *l.Logger
 	pool   *sync.Pool
-	format Format
+	format log.Format
 }
 
-func NewStdLogger(w io.Writer) Logger {
+func NewStdLogger(w io.Writer) log.Logger {
 	return &stdLogger{
-		log: log.New(w, "", 0),
+		log: l.New(w, "", 0),
 		pool: &sync.Pool{
 			New: func() interface{} {
 				return new(bytes.Buffer)
@@ -24,7 +28,7 @@ func NewStdLogger(w io.Writer) Logger {
 	}
 }
 
-func (l *stdLogger) Log(level Level, keyvals ...interface{}) {
+func (l *stdLogger) Log(level log.Level, keyvals ...interface{}) {
 	if len(keyvals) == 0 {
 		return
 	}

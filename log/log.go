@@ -2,11 +2,7 @@ package log
 
 import (
 	"context"
-
-	"log"
 )
-
-var DefaultLogger = NewStdLogger(log.Writer())
 
 type Logger interface {
 	Log(level Level, keyvals ...interface{})
