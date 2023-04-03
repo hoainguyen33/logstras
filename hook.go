@@ -1,4 +1,4 @@
-package logtras
+package logstras
 
 import "github.com/hoainguyen33/logstras/log"
 

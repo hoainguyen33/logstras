@@ -1,4 +1,4 @@
-package logtras
+package logstras
 
 import (
 	"bytes"
